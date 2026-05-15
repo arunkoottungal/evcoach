@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EVCoach — Connecting...</title>
+    <script>
+        // Extract the authorisation code from the URL
+        // and pass it back to the Android app via deep link
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        const state = params.get('state');
+        const error = params.get('error');
+
+        if (error) {
+            document.title = 'EVCoach — Authorisation Failed';
+        } else if (code) {
+            // Redirect to Android app deep link
+            window.location.href = 
+                `com.evcoach.poc://oauth/callback?code=${code}&state=${state}`;
+        }
+    </script>
+</head>
+<body>
+    <p style="font-family:sans-serif;text-align:center;margin-top:3rem;color:#666;">
+        Connecting EVCoach to your Volvo account...<br>
+        <small>You can close this window if nothing happens.</small>
+    </p>
+</body>
+</html>
